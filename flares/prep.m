@@ -73,7 +73,5 @@ Y_f  = max(Time_Start(:,1));
 dn_o = datenum([Y_o,1,1]);
 dn_f = datenum([Y_f,12,31]);
 
-dn_e = floor(Ts);
-Npd = hist(dn_e,[dn_o:dn_f]');
-
-save -V6 xray.mat Time_Start Class_Letter Class_Number Npd Year_o Year_f
+csvwrite('xray.csv', [Time_Start,Class_Letter,Class_Number]);
+save -V6 xray.mat Time_Start Class_Letter Class_Number

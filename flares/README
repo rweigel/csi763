@@ -1,2 +1,4 @@
 Call the script main from the MATLAB command line and see comments in
 prep.m and compute.m.
+
+The original `xrayYYYY` data files copied to `csi763` seem to have been to https://www.ngdc.noaa.gov/stp/space-weather/solar-data/solar-features/solar-flares/x-rays/ and re-named.
