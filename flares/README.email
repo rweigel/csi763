@@ -1,0 +1,38 @@
+From: Bob Weigel <rweigel@gmu.edu>
+To "Eric A. Kihn" <Eric.A.Kihn@noaa.gov>,Dan Basinger <wdbasinger@hotmail.com>,Oscar <oolmedo@gmu.edu>	 
+Date: Apr 13, 2007 5:20 PM	 
+Subject: Documentation of solar flare data
+
+Hi Eric,
+
+A few students are looking at solar flare data for a class project.
+In ftp://ftp.ngdc.noaa.gov/STP/SOLAR_DATA/SOLAR_FLARES/XRAY_FLARES/xtray.fmt.REVISED
+it says that the X-ray intensity goes from 1.0 to 9.9.  However, I
+find values that go from 0 to  280.  In the attached histogram of
+columns 61-63, you can see that some of the data files used the 0-0.9
+convention and others used 0-99.   I could correct this by taking any
+non integer found in the text file and multiply by 10 (assuming 1.0 is
+not listed as 1).  However, I don't know how to account for numbers
+greater than 99.
+
+Also, on line 27, the B class is not mentioned, although it is
+mentioned in NOTE 2.
+
+Here is a matlab file of all of the data from 1975 to 2003.  The
+variable Class_Name is 0, 1, 2, 3 corresponding to B,C,M,X.
+http://www.scs.gmu.edu/~rweigel/private/xray.mat
+
+Most of the numbers below 10 are before 1987 and after 1995,
+(Time_Start(find(Class_Number<10),:)))
+
+Would you please forward this message to the appropriate person?
+
+Also, suppose this happened to ViRBO data.  I would want to post this
+email message and image on the ViRBO data page and get a reply that
+was also posted on the page.  I think this is the direction we are
+going in development, but I just wanted to remind you why I am pushing
+the idea.
+
+Thanks,
+
+Bob

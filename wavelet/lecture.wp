@@ -1,0 +1,95 @@
+= Lecture =
+== Terminology ==
+* Periodogram (also refered to as the  "raw periodogram" or "sample spectrum")This 
+:<math>C(a_i^2+b_i^2)=C|d_i|^2</m>,
+:where <math>a_i</m> and <math>b_i</m> are determined from
+:<math>a_i = \frac{2}{N}\sum_{t=1}^{N}x_tcos(2\pi f_i t)</m>
+:<math>b_i = \frac{2}{N}\sum_{t=1}^{N}x_tsin(2\pi f_i t)</m>
+<math>f_i = i t/N</m>and <math>i = 1,...,N/2</m>,
+:where
+:<math>x_t=a_0 + \sum_{i=1}^{N/2-1}\left[a_icos(2\pi i t/N) + b_isin(2\pi i t/N)\right] + a_{N/2}cos(\pi t)</m>
+:for N even, and
+:<math>x_t=a_0 + \sum_{i=1}^{(N-1)/2}\left[a_icos(2\pi i t/N) + b_isin(2\pi i t/N)\right]</m>
+:and
+:<math>a_i = \frac{2}{N}\sum_{t=1}^{N}x_tcos(2\pi f_i t)</m>
+:<math>b_i = \frac{2}{N}\sum_{t=1}^{N}x_tsin(2\pi f_i t)</m>
+for i = 1,...,(N-1)/2,
+and 
+:The proportionality <math>C</m> is not used consistently (<ref>Chatfield</ref>, p110-111).  <ref>Box and Jenkins</ref>, p35 use <math>C=N/2</m>, while ... What is important to keep in mind is Parseval's theorem and the fact that you are usually interested in relative amplitude versus other amplitudes or a white noise "power spectral density".
+* Power Spectral Density (PSD).  The result of manipulation of the periodogram to smooth it (to reduce the variance problem).
+* FFT.  In numerical analysis, fourier transform and fft are often used interchangebly.  In the homework I asked you to plot FFT, which is
+:<math>d_k = a_k+ib_k</m>.  I should have said, plot the periodogram or the raw periodogram.
+
+== Why complex notation? ==
+
+Or, why does Matlab give complex output from FFT?
+
+*Reason 1: Would you rather write
+:<math>a_i=\frac{2}{N}\sum x_t cos(2\pi i t)</m>
+:<math>b_i=\frac{2}{N}\sum x_t sin(2\pi i t)</m>
+or
+:<math>d_i=\frac{2}{N}\sum x_t e^{2\pi i t}</m>, where <math>d_i=a_i+ib_i</m>?
+
+*Reason 2: Algebra is often easier:
+:What is <math>cos(\theta)sin(2\theta)</m>
+:Using <math>cos(\theta)=\frac{1}{2}\left(e^{i\theta}+e^{-i\theta}\right)</m> and
+:<math>sin(\theta)=\frac{1}{2}\left(e^{i\theta}-e^{-i\theta}\right)</m>
+gives
+:<math>\frac{1}{4}\left(e^{3i\theta}-e^{i\theta}+e^{i\theta}-e^{-3i\theta}\right)</m>
+:<math>\frac{1}{4}\left(sin(3\theta)+cos(\theta)\right)</m>
+
+== Wavelets ==
+
+*Similar to spectogram (=sliding fourier transforms).  Result is a decomposition of a time series, which is data in time-amplitude space to time-frequency space.
+*Historical information: <ref>The world according to wavelents, "The Story of a Mathematical Technique in the Making", Barbara Burke Hubbard, 1996.</ref>
+*Diagram of decomposition.
+*Kaiser, 1994 as summarized by Torrence and Compo, 1998: The WFT (Windowed Fourier Transform) is inaccurate and inefficent for time-frequency localization.
+**Imposes a scale or "response interval" in the analysis.  The scale is the time scale of the window.
+**Inaccurate because of aliasing of both high- and low-frequency components that do not fall in frequency range of window.
+**Inefficient:<math>T/2\Delta t</m> frequencies must be analized at each time step. Several window lengths must usually be analized to find most appropriate.
+
+In summary, when the choice of scaling is not clear, it may be better to use a wavelet method, which has scale independent time--frequency localization.  You often hear about wavelets in the analysis of time series with fractal properties.
+
+[Image]
+
+In summary:
+* Wavelet advantages over WFT (or spectogram)
+* Wavelet disadvantage over WFT
+
+== Wavelet Transform ==
+
+The CWT (continuous wavelet transform) is localized:
+
+<math>W_n(s)=\sum{n'=0}^{N-1}x_{n'}\psi\left[\frac{(n'-n)\Delta t}{s}\right]</m>
+
+compare this with the fourier transform, written with the same notation
+
+<math>F(s) = \sum{n'=0}^{N-1}x_{n'}e^{-2\pi i s n'/N}</m>
+
+note that there is no $n$ on the left--hand side.  This is introduced with a window function
+
+<math>F_n(s) = \sum{n'=0}^{N-1}x_{n'}e^{-2\pi i s n'/N}w(n'-n)</m>
+
+*A Wavelet compares a signal to a function
+
+*A Wavelet is a differencing operation
+
+*A wavelet can do better image compression that the WFT.  (Well, it did until the WFT people heard this and realizing that the WFT and CWT are mathematically related and showed that a WFT could be constructed that gives effectively the same results.  I am guessing that the difference is that the mathematics is more straigtforward if the problem is cast in the wavelet notation.)
+
+[Image]
+
+== CWT vs the DWT ==
+
+* In the periodogram, how many points do we have?  In the spectogram, how many points?
+*CWD is like a WFT in that it has redundant information.  Note that the continuous wavelet transform is not really continuous in the sense that the CWT can be used on a sampled signal.  The continuous mean that it gives a continuum of time scales on the vertical axis.  The DWT uses only a subset of the possible frequency values.
+
+[Image from Percival]
+
+
+
+
+
+
+
+
+

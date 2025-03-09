@@ -1,0 +1,13 @@
+T = 6;
+t = [0:T]';
+A = 1.0;
+phi = pi/4;
+theta = pi/6;
+omega = 2.0;
+a = A*sin(omega*t) + randn(T+1,1);
+z = a*cos(theta);
+y = a*sin(theta)*sin(pi);
+x = a*sin(theta)*cos(phi);
+X = [y' ; x'; z'; x'; z'; y'];
+A = X*X';
+[E,D,Et] = svd(A);
